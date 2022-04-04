@@ -3,6 +3,7 @@ import ReceiptTable from './ReceiptTable'
 
 import DomToImage from 'dom-to-image'
 import useNfts from '../hooks/useNfts'
+import useEns from '../hooks/useEns'
 
 import { ellipseAddress } from '../utils/utilities'
 import { format } from 'date-fns'
@@ -14,6 +15,7 @@ type Props = {
 const Receipt = ({ address }: Props) => {
   const receiptRef = useRef(null)
   const { nfts, total } = useNfts(address)
+  const { ens } = useEns(address)
 
   const today = format(new Date(), 'EEEE, MMMM dd, Y')
 
@@ -33,7 +35,9 @@ const Receipt = ({ address }: Props) => {
         </section>
 
         <section className="font-serif leading-4 mb-4">
-          <p>ORDER #0001 FOR {ellipseAddress(address)} - jakz.eth</p>
+          <p>
+            ORDER #0001 FOR {ellipseAddress(address)} {ens && `- ${ens}`}
+          </p>
           <p>{today}</p>
         </section>
 
@@ -42,7 +46,9 @@ const Receipt = ({ address }: Props) => {
         </div>
 
         <section className="font-serif leading-4 mb-4">
-          <p>Address: {ellipseAddress(address)} - jakz.eth</p>
+          <p>
+            Address: {ellipseAddress(address)} - {ens && `- ${ens}`}
+          </p>
           <p>Network: Ethereum</p>
         </section>
 

@@ -6,6 +6,7 @@ import DownloadButton from '../components/DownloadButton'
 import Receipt from '../components/Receipt'
 
 const Home: NextPage = () => {
+  const address = '0x517aea67196c8975dd100236689d0ca10b928f58'
 
   return (
     <div className="antialiased">
@@ -16,11 +17,9 @@ const Home: NextPage = () => {
       </Head>
 
       <div className="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <section
-          className="flex flex-col items-center justify-center mb-4"
-        >
-          <h1 className='mb-4 font-bold '>NFT Receipt Generator</h1>
-          <Receipt address='0x517aea67196c8975dd100236689d0ca10b928f58'></Receipt>
+        <section className="flex flex-col items-center justify-center mb-4">
+          <h1 className="mb-4 font-bold ">NFT Receipt Generator</h1>
+          <Receipt address={address}></Receipt>
         </section>
         {/* <DownloadButton dom={receipt.current}></DownloadButton> */}
       </div>
