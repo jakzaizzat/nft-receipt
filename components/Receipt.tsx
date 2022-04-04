@@ -69,7 +69,9 @@ const Receipt = ({ address }: Props) => {
             .toPng(receiptRef.current)
             .then(function (dataUrl: string) {
               let link = document.createElement('a')
-              link.download = 'my-image-name.jpeg'
+              link.download = `${
+                ens ? ens : ellipseAddress(address)
+              }-receipt.jpeg`
               link.href = dataUrl
               link.click()
             })
