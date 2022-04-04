@@ -1,57 +1,9 @@
-const nfts = [
-  {
-    id: '0x0',
-    name: 'Woodies',
-    amount: '0',
-  },
-  {
-    id: '0x0',
-    name: 'Woodies',
-    amount: '0',
-  },
-  {
-    id: '0x0',
-    name: 'Woodies',
-    amount: '0',
-  },
-  {
-    id: '0x0',
-    name: 'Woodies',
-    amount: '0',
-  },
-  {
-    id: '0x0',
-    name: 'Woodies',
-    amount: '0',
-  },
-  {
-    id: '0x0',
-    name: 'Woodies',
-    amount: '0',
-  },
-  {
-    id: '0x0',
-    name: 'Woodies',
-    amount: '0',
-  },
-  {
-    id: '0x0',
-    name: 'Woodies',
-    amount: '0',
-  },
-  {
-    id: '0x0',
-    name: 'Woodies',
-    amount: '0',
-  },
-  {
-    id: '0x0',
-    name: 'Woodies',
-    amount: '0',
-  },
-]
+type Props = {
+  nfts: []
+  total: number
+}
 
-const ReceiptTable = () => {
+const ReceiptTable = ({ nfts, total }: Props) => {
   return (
     <table className="font-serif w-full leading-4">
       <thead>
@@ -67,20 +19,20 @@ const ReceiptTable = () => {
         {nfts.map((nft, index) => (
           <tr key={index}>
             <td className="text-left">{index + 1}</td>
-            <td className="text-left">{nft.name}</td>
-            <td className="text-right">{nft.amount}</td>
+            <td className="text-left">{nft.amount}x {nft.name}</td>
+            <td className="text-right">{nft.value}</td>
           </tr>
         ))}
         <tr className="border-t border-dashed border-black">
           <td>Item count</td>
           <td></td>
-          <td className="text-right">10</td>
+          <td className="text-right">{nfts.length}</td>
         </tr>
         <tr className="border-b border-dashed border-black">
           <td>Total</td>
           <td></td>
           <td className="text-right">
-            5 <span className="text-xs">⧫</span>
+            {total} <span className="text-xs">⧫</span>
           </td>
         </tr>
       </tbody>

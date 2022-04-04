@@ -2,12 +2,19 @@ import { useRef } from 'react'
 import ReceiptTable from './ReceiptTable'
 
 import DomToImage from 'dom-to-image'
+import useNfts from '../hooks/useNfts'
+
+import { ellipseAddress } from '../utils/utilities'
+import { format } from 'date-fns'
 
 const Receipt = () => {
   const receiptRef = useRef(null)
+  const { nfts, total, address } = useNfts()
+
+  const today = format(new Date(), 'EEEE, MMMM dd, Y')
 
   return (
-    <div className='grid gap-4'>
+    <div className="grid gap-4">
       <div
         ref={receiptRef}
         style={{
@@ -22,16 +29,16 @@ const Receipt = () => {
         </section>
 
         <section className="font-serif leading-4 mb-4">
-          <p>ORDER #0001 FOR 0x51***8F58 - jakz.eth</p>
-          <p>MONDAY, APRIL 4, 2022</p>
+          <p>ORDER #0001 FOR {ellipseAddress(address)} - jakz.eth</p>
+          <p>{today }</p>
         </section>
 
         <div className="mb-4">
-          <ReceiptTable></ReceiptTable>
+          <ReceiptTable nfts={nfts} total={total}></ReceiptTable>
         </div>
 
         <section className="font-serif leading-4 mb-4">
-          <p>Address: 0x51***8F58 - jakz.eth</p>
+          <p>Address: {ellipseAddress(address)} - jakz.eth</p>
           <p>Network: Ethereum</p>
         </section>
 

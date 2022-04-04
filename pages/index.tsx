@@ -17,8 +17,9 @@ const Home: NextPage = () => {
 
       <div className="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <section
-          className="flex items-center justify-center mb-4"
+          className="flex flex-col items-center justify-center mb-4"
         >
+          <h1 className='mb-4 font-bold '>NFT Receipt Generator</h1>
           <Receipt></Receipt>
         </section>
         {/* <DownloadButton dom={receipt.current}></DownloadButton> */}
