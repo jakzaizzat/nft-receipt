@@ -1,5 +1,7 @@
+import { NftData } from "../types"
+
 type Props = {
-  nfts: []
+  nfts: NftData[]
   total: number
 }
 

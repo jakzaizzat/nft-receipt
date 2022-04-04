@@ -6,14 +6,16 @@ export type OpenseaTypes = {
   to_account: { address: string }
 }
 
+export type NftData = {
+  name: string
+  id: string
+  created_date: string
+  quantity: string
+  asset_contract: string
+  amount: number
+  value: number
+}
+
 export type ReceiptData = {
-  result: {
-    name: string
-    id: string
-    created_date: string
-    quantity: string
-    asset_contract: string
-    amount: number
-    value: number
-  }[]
+  result: NftData[]
 }
