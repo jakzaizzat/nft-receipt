@@ -52,7 +52,7 @@ export default async function handler(
         item.transaction_hash = item.transaction.transaction_hash
         return item
       })
-      .filter((item) => item.to_account?.address === USER_ADDRESS)
+      .filter((item) => item.to_account?.address === USER_ADDRESS.toLowerCase())
 
     let result = groupBy(opensea_assets, 'collection_name')
 
@@ -70,13 +70,13 @@ export default async function handler(
         asset_contract: item.asset.asset_contract.address,
         amount: uniqBy(result[key], 'transaction_hash').length,
         value:
-          (MORALIS_DATA.result.find(
-            (moralis_item) =>
-              moralis_item.transaction_hash ===
-              item.transaction.transaction_hash,
-          )?.value /
-            1000000000000000000) *
-          uniqBy(result[key], 'transaction_hash').length,
+          (
+            MORALIS_DATA.result.find(
+              (moralis_item) =>
+                moralis_item.transaction_hash ===
+                item.transaction.transaction_hash,
+            )?.value / 1000000000000000000
+          ).toFixed(3) * uniqBy(result[key], 'transaction_hash').length,
       })
     }
 

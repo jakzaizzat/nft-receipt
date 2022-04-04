@@ -7,7 +7,7 @@ export default function useEns(address: string) {
   const fetchEns = async () => {
     try {
       const response = await axios.get(
-        `https://api.ensideas.com/ens/resolve/${address}`,
+        `https://api.ensideas.com/ens/resolve/${address.toLowerCase()}`,
       )
       setEns(response.data.displayName)
     } catch (error) {}
