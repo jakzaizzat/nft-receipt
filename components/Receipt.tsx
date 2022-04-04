@@ -7,9 +7,13 @@ import useNfts from '../hooks/useNfts'
 import { ellipseAddress } from '../utils/utilities'
 import { format } from 'date-fns'
 
-const Receipt = () => {
+type Props = {
+  address: string
+}
+
+const Receipt = ({ address }: Props) => {
   const receiptRef = useRef(null)
-  const { nfts, total, address } = useNfts()
+  const { nfts, total } = useNfts(address)
 
   const today = format(new Date(), 'EEEE, MMMM dd, Y')
 
@@ -30,7 +34,7 @@ const Receipt = () => {
 
         <section className="font-serif leading-4 mb-4">
           <p>ORDER #0001 FOR {ellipseAddress(address)} - jakz.eth</p>
-          <p>{today }</p>
+          <p>{today}</p>
         </section>
 
         <div className="mb-4">

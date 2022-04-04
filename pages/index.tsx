@@ -20,7 +20,7 @@ const Home: NextPage = () => {
           className="flex flex-col items-center justify-center mb-4"
         >
           <h1 className='mb-4 font-bold '>NFT Receipt Generator</h1>
-          <Receipt></Receipt>
+          <Receipt address='0x517aea67196c8975dd100236689d0ca10b928f58'></Receipt>
         </section>
         {/* <DownloadButton dom={receipt.current}></DownloadButton> */}
       </div>
