@@ -5,7 +5,7 @@ import DomToImage from 'dom-to-image'
 import useNfts from '../hooks/useNfts'
 import useEns from '../hooks/useEns'
 
-import { ellipseAddress } from '../utils/utilities'
+import { ellipseAddress } from '../lib/utilities'
 import { format } from 'date-fns'
 
 type Props = {
