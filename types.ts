@@ -1,6 +1,8 @@
 export type OpenseaTypes = {
   collection_name: string
-  asset: { asset_contract: { name: string } }
+  created_date: string
+  quantity: string
+  asset: { asset_contract: { name: string; address: string } }
   transaction_hash: string
   transaction: { transaction_hash: string }
   to_account: { address: string }

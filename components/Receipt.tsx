@@ -31,7 +31,7 @@ const Receipt = ({ address }: Props) => {
       >
         <section className="text-center mb-4">
           <h1 className="text-2xl font-bold">NFT Receipt</h1>
-          <p className="text-sm">last month</p>
+          <p className="text-sm">2022</p>
         </section>
 
         <section className="font-serif leading-4 mb-4">

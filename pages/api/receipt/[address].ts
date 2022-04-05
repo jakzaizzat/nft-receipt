@@ -17,25 +17,41 @@ export default async function handler(
   res: NextApiResponse<Data>,
 ) {
   const USER_ADDRESS = req.query.address as string
-  let OPENSEA_DATA
+  let OPENSEA_DATA: any[] = []
   let MORALIS_DATA
 
   try {
-    const response = await axios.get('https://api.opensea.io/api/v1/events', {
-      headers: {
-        'X-API-KEY': process.env.OPENSEA_KEY || '',
-      },
-      params: {
+    let openseaFlag = false
+    let nextPageSlug
+
+    while (!openseaFlag) {
+      const params = {
         only_opensea: false,
         account_address: USER_ADDRESS,
         event_type: 'transfer',
-        occurred_after: '1640995200'
-      },
-    })
+        occurred_after: '1640995200',
+        cursor: null,
+      }
 
-    OPENSEA_DATA = response.data || []
+      nextPageSlug ? (params.cursor = nextPageSlug) : null
 
-    console.log(`fetch opensea done`)
+      console.log(`Fetching opensea API`)
+
+      const response = await axios.get('https://api.opensea.io/api/v1/events', {
+        headers: {
+          'X-API-KEY': process.env.OPENSEA_KEY || '',
+        },
+        params,
+      })
+
+      OPENSEA_DATA = [...OPENSEA_DATA, ...response.data.asset_events]
+
+      if (response.data.next) {
+        nextPageSlug = response.data.next
+      } else {
+        openseaFlag = true
+      }
+    }
 
     const moralisResponse = await axios.get(
       `https://deep-index.moralis.io/api/v2/${USER_ADDRESS}/nft/transfers?chain=eth&format=decimal&direction=to`,
@@ -50,16 +66,14 @@ export default async function handler(
 
     console.log(`fetch moralis done`)
 
-    const opensea_assets = OPENSEA_DATA.asset_events
-      .map((item: OpenseaTypes) => {
-        item.collection_name = item.asset.asset_contract.name
-        item.transaction_hash = item.transaction.transaction_hash
-        return item
-      })
-      .filter(
-        (item: OpenseaTypes) =>
-          item.to_account?.address === USER_ADDRESS.toLowerCase(),
-      )
+    const opensea_assets = OPENSEA_DATA.map((item: OpenseaTypes) => {
+      item.collection_name = item.asset.asset_contract.name
+      item.transaction_hash = item.transaction.transaction_hash
+      return item
+    }).filter(
+      (item: OpenseaTypes) =>
+        item.to_account?.address === USER_ADDRESS.toLowerCase(),
+    )
 
     let result = groupBy(opensea_assets, 'collection_name')
 
@@ -98,6 +112,7 @@ export default async function handler(
         value: formattedValue,
       })
     }
+
 
     data.result = data.result.filter((item) => Number(item.value) > 0)
 

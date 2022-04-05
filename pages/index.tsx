@@ -6,7 +6,11 @@ import DownloadButton from '../components/DownloadButton'
 import Receipt from '../components/Receipt'
 
 const Home: NextPage = () => {
-  const address = '0x517aea67196c8975dd100236689d0ca10b928f58'
+  // pedagang.eth 0x255713F6f557e3a66E2D4aC48888FCE70B2457b1
+  // jakz 0x517AEa67196C8975dd100236689D0CA10B928F58
+  // nerone 0xA6c0F7bde119930fB919ed02F8155887EcF0D756
+  // raffiq 0x23b96C22F99542671511b42343a16D8Ee04D84Bd
+  const address = '0xA6c0F7bde119930fB919ed02F8155887EcF0D756'
 
   return (
     <div className="antialiased">
