@@ -18,10 +18,10 @@ const Home: NextPage = () => {
       <div className="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <section className="flex flex-col items-center justify-center mb-4">
           <h1 className="mb-4 font-bold ">
-            NFT Receipt Generator
+            NFT Receipt Generator 
             {address && (
-              <span>
-                for{' '}
+              <span className='ml-1'>
+                for {' '}
                 <button
                   onClick={disconnect}
                   className="border-b hover:text-gray-500"

@@ -4,8 +4,11 @@ import { useEffect, useState } from 'react'
 export default function useNfts(address: string) {
   const [nfts, setNfts] = useState([])
   const [total, setTotal] = useState(0)
+  const [loading, setLoading] = useState(false)
+
   const fetchNft = async () => {
     try {
+      setLoading(true)
       const response = await axios.get(`/api/receipt/${address}`)
       setNfts(response.data.result)
       setTotal(response.data.total)
@@ -14,16 +17,19 @@ export default function useNfts(address: string) {
       console.log(error)
       setNfts([])
       setTotal(0)
+    } finally {
+      setLoading(false)
     }
   }
 
   useEffect(() => {
-    if(!address) return
+    if (!address) return
     fetchNft()
   }, [address])
 
   return {
     nfts,
     total,
+    loading
   }
 }
