@@ -29,6 +29,7 @@ export default async function handler(
         only_opensea: false,
         account_address: USER_ADDRESS,
         event_type: 'transfer',
+        occurred_after: '1640995200'
       },
     })
 
@@ -79,13 +80,13 @@ export default async function handler(
           moralis_item.transaction_hash === item.transaction.transaction_hash,
       )
 
-      const transactionValue = transaction.value || 0
+      const transactionValue = transaction?.value || 0
 
       const value =
         (transactionValue / 1000000000000000000) *
         uniqTransactionsInCollection?.length
 
-      const formattedValue = value
+      const formattedValue = value.toFixed(3)
 
       data.result.push({
         name: key,
@@ -98,10 +99,10 @@ export default async function handler(
       })
     }
 
-    data.result = data.result.filter((item) => item.value > 0)
+    data.result = data.result.filter((item) => Number(item.value) > 0)
 
     const total = data.result
-      .reduce((acc, cur) => acc + cur.value, 0)
+      .reduce((acc, cur) => acc + Number(cur.value), 0)
       .toFixed(3)
 
     res.status(200).json({

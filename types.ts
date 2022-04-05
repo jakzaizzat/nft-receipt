@@ -13,7 +13,7 @@ export type NftData = {
   quantity: string
   asset_contract: string
   amount: number
-  value: number
+  value: string
 }
 
 export type ReceiptData = {
