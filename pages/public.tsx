@@ -1,13 +1,14 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
-import Image from 'next/image'
-import { useEffect, useRef } from 'react'
-import DownloadButton from '../components/DownloadButton'
-import Receipt from '../components/Receipt'
+import { useEffect } from 'react'
+import Computer from '../components/Computer'
+import useNfts from '../hooks/useNfts'
 import useWallet from '../hooks/useWallet'
 
 const Home: NextPage = () => {
   const { address, connect, disconnect } = useWallet()
+
+  const { nfts, total, loading } = useNfts(address || '')
 
   useEffect(() => {
     if (!address) return
@@ -23,22 +24,8 @@ const Home: NextPage = () => {
 
       <div className="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <section className="flex flex-col items-center justify-center mb-4">
-          <h1 className="mb-4 font-bold ">NFT Receipt Generator asd</h1>
-          {address ? (
-            <button
-              className="flex items-center px-2 py-1 border border-transparent shadow-sm text-sm leading-4 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 mx-auto"
-              onClick={disconnect}
-            >
-              {address}
-            </button>
-          ) : (
-            <button
-              className="flex items-center px-2 py-1 border border-transparent shadow-sm text-sm leading-4 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 mx-auto"
-              onClick={connect}
-            >
-              Connect
-            </button>
-          )}
+          <h1 className="mb-4 font-bold ">NFT Receipt Generator</h1>
+          <Computer></Computer>
         </section>
       </div>
     </div>
