@@ -1,5 +1,6 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
+import Modal from '../components/Modal'
 import Receipt from '../components/Receipt'
 import useWallet from '../hooks/useWallet'
 import { ellipseAddress } from '../lib/utilities'
@@ -43,6 +44,7 @@ const Home: NextPage = () => {
             </button>
           )}
         </section>
+        <Modal></Modal>
       </div>
     </div>
   )

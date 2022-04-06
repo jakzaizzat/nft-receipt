@@ -13,9 +13,16 @@ type Props = {
   nfts: any
   total: number
   ens?: string
+  animated?: boolean
 }
 
-const Receipt = ({ address, ens = 's', nfts, total }: Props) => {
+const Receipt = ({
+  address,
+  ens = 's',
+  nfts,
+  total,
+  animated = false,
+}: Props) => {
   const receiptRef = useRef(null)
   // const { nfts, total, loading } = useNfts(address)
   // const { ens } = useEns(address)
@@ -50,7 +57,7 @@ const Receipt = ({ address, ens = 's', nfts, total }: Props) => {
   //   )
 
   return (
-    <div className="grid gap-4 receipt">
+    <div className={`grid gap-4 z-10 ${animated ? 'receipt' : ''}`}>
       <div
         ref={receiptRef}
         style={{
@@ -60,7 +67,7 @@ const Receipt = ({ address, ens = 's', nfts, total }: Props) => {
         id="receipt"
       >
         <section className="text-center mb-4">
-          <h1 className="text-2xl font-bold">NFT Receipt</h1>
+          <h1 className="text-2xl font-bold">NFT Receipt {animated}</h1>
           <p className="text-sm">2022</p>
         </section>
 
@@ -90,7 +97,7 @@ const Receipt = ({ address, ens = 's', nfts, total }: Props) => {
           <p className="text-center text-sm">nft-receipt.xyz</p>
         </section>
       </div>
-      <button
+      {/* <button
         className="flex items-center px-2 py-1 border border-transparent shadow-sm text-sm leading-4 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 mx-auto"
         // TODO: Refactor to component
         onClick={() => {
@@ -111,7 +118,7 @@ const Receipt = ({ address, ens = 's', nfts, total }: Props) => {
         }}
       >
         Download
-      </button>
+      </button> */}
     </div>
   )
 }
