@@ -6,7 +6,7 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['Inter var', 'sans-serif'],
+        sans: ['"Press Start 2P"', 'cursive'],
         serif: ['receipt', 'serif'],
       },
     },

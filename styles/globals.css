@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
 @font-face {
   font-family: 'receipt';
   src: url('../public/fonts/MerchantCopy.ttf') format('truetype');
@@ -8,28 +10,48 @@
 @tailwind utilities;
 
 /* TODO: Move to components */
-#dots #dot1{
+#dots #dot1 {
   animation: load 1s infinite;
 }
 
-#dots #dot2{
+#dots #dot2 {
   animation: load 1s infinite;
   animation-delay: 0.2s;
 }
 
-#dots #dot3{
+#dots #dot3 {
   animation: load 1s infinite;
   animation-delay: 0.4s;
 }
 
-@keyframes load{
-  0%{
+@keyframes load {
+  0% {
     opacity: 0;
   }
-  50%{
+  50% {
     opacity: 1;
   }
-  100%{
+  100% {
     opacity: 0;
   }
+}
+
+@-webkit-keyframes print {
+  0% {
+    -moz-transform: translateY(-170%);
+    -ms-transform: translateY(-170%);
+    -webkit-transform: translateY(-170%);
+    transform: translateY(-170%);
+  }
+  100% {
+    -moz-transform: translateY(0%);
+    -ms-transform: translateY(0%);
+    -webkit-transform: translateY(0%);
+    transform: translateY(0%);
+  }
+}
+
+.receipt {
+  -webkit-animation: print 5s cubic-bezier(0.75, 0.8, 0, -0.5);
+  z-index: 1;
 }
