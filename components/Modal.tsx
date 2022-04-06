@@ -59,6 +59,7 @@ const Modal = ({ onClose, children, total }: Props) => {
             <a
               href={`https://twitter.com/intent/tweet?text=Yo!%20I%20just%20spent%20${total}%20eth%20on%20NFT%20this%20year.%20`}
               target="_blank"
+              rel="noreferrer"
               className="flex items-center  p-3 border border-transparent shadow-sm text-xs leading-4 font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 mx-right"
             >
               Shill
