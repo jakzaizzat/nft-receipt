@@ -1,14 +1,16 @@
-import { Fragment, useState } from 'react'
 import { motion } from 'framer-motion'
 import DomToImage from 'dom-to-image'
+import { ellipseAddress } from '../lib/utilities'
 
 type Props = {
   onClose: () => void
   total: number
   children: React.ReactNode
+  ens?: string
+  address?: string
 }
 
-const Modal = ({ onClose, children, total }: Props) => {
+const Modal = ({ onClose, children, total, ens, address }: Props) => {
   return (
     <div className="bg-purple-500/25 absolute top-0 right-0 h-full w-full z-50 flex items-center justify-center p-4">
       <motion.div
@@ -41,10 +43,9 @@ const Modal = ({ onClose, children, total }: Props) => {
                   .toPng(document.querySelector('#receipt'))
                   .then(function (dataUrl: string) {
                     let link = document.createElement('a')
-                    // link.download = `${
-                    //   ens ? ens : ellipseAddress(address)
-                    // }-receipt.jpeg`
-                    link.download = 'receipt.jpeg'
+                    link.download = `${
+                      ens ? ens : ellipseAddress(address)
+                    }-receipt.jpeg`
                     link.href = dataUrl
                     link.click()
                   })

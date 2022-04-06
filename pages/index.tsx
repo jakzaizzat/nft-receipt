@@ -64,7 +64,12 @@ const Home: NextPage = () => {
         )}
 
         {isModalOpen && (
-          <Modal onClose={() => setIsModalOpen(false)} total={total}>
+          <Modal
+            onClose={() => setIsModalOpen(false)}
+            total={total}
+            ens={ens || ''}
+            address={address || ''}
+          >
             {address && !loading && (
               <Receipt
                 address={address}
