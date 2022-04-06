@@ -128,3 +128,23 @@
 .scrollable-element {
   scrollbar-color: red yellow;
 }
+
+html {
+  --scrollbarBG: #581c87;
+  --thumbBG: #7e22ce;
+}
+.scrollable-element::-webkit-scrollbar {
+  width: 11px;
+}
+.scrollable-element {
+  scrollbar-width: thin;
+  scrollbar-color: var(--thumbBG) var(--scrollbarBG);
+}
+.scrollable-element::-webkit-scrollbar-track {
+  background: var(--scrollbarBG);
+}
+.scrollable-element::-webkit-scrollbar-thumb {
+  background-color: var(--thumbBG) ;
+  border-radius: 6px;
+  border: 3px solid var(--scrollbarBG);
+}

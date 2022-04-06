@@ -23,7 +23,11 @@ export default function useNfts(address: string) {
   }
 
   useEffect(() => {
-    if (!address) return
+    if (!address) {
+      setNfts([])
+      setTotal(0)
+      return
+    }
     fetchNft()
   }, [address])
 

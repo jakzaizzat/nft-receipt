@@ -49,7 +49,10 @@ const Home: NextPage = () => {
         </div>
 
         {address && !loading && (
-          <div className="flex items-center justify-center">
+          <div
+            className="flex items-center justify-center cursor-pointer"
+            onClick={() => setIsModalOpen(true)}
+          >
             <Receipt
               address={address}
               nfts={nfts}
