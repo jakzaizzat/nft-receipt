@@ -1,6 +1,7 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import { useEffect, useState } from 'react'
+import useSound from 'use-sound'
 import Modal from '../components/Modal'
 import Navigation from '../components/Navigation'
 import Receipt from '../components/Receipt'
@@ -12,16 +13,20 @@ const Home: NextPage = () => {
   const { address, connect, disconnect } = useWallet()
   const { ens } = useEns(address || '')
   const [isModalOpen, setIsModalOpen] = useState(false)
+  const [play, { stop }] = useSound('/sounds/printer.wav')
+
 
   const { nfts, total, loading } = useNfts(address || '')
 
   useEffect(() => {
     if (nfts.length > 0) {
       console.log('useEffect')
+      play()
       const interval = setInterval(() => {
         console.log('setInterval')
         setIsModalOpen(true)
         clearInterval(interval)
+        stop()
       }, 5000)
     }
   }, [nfts])
@@ -34,7 +39,7 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className="bg-gray-800 h-screen font-sans">
-        <div className="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8 py-16 ">
+        <div className="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
           {!loading && nfts.length === 0 && (
             <h1 className="mb-4 text-center leading-relaxed font-bold text-2xl text-white max-w-2xl mx-auto">
               Generate your NFT 2022 Receipt and send to your tax accountant
@@ -81,18 +86,11 @@ const Home: NextPage = () => {
           </Modal>
         )}
 
-        {/* <button
-          onClick={() => {
-            setIsModalOpen(true)
-          }}
-          className="text-white"
-        >
-          Open
-        </button> */}
         <Navigation
           address={address || ''}
           connect={connect}
           disconnect={disconnect}
+          stop={stop}
         ></Navigation>
       </div>
     </div>

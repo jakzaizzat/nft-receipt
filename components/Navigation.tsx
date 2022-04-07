@@ -4,9 +4,11 @@ type Props = {
   address?: string
   connect: () => void
   disconnect: () => void
+  stop: () => void
 }
 
-const Navigation = ({ address, connect, disconnect }: Props) => {
+const Navigation = ({ address, connect, disconnect, stop }: Props) => {
+
   const handleClick = () => {
     address ? disconnect() : connect()
   }
