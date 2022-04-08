@@ -8,7 +8,7 @@
 
 @font-face {
   font-family: 'receipt';
-  src: url('../public/fonts/MerchantCopy.ttf') format('truetype');
+  src: url('https://nft-receipt.vercel.app/fonts/MerchantCopy.ttf') format('truetype');
 }
 
 .dot-elastic {
