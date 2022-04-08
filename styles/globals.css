@@ -1,14 +1,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 
-@font-face {
-  font-family: 'receipt';
-  src: url('../public/fonts/MerchantCopy.ttf') format('truetype');
-}
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+
+@font-face {
+  font-family: 'receipt';
+  src: url('../public/fonts/MerchantCopy.ttf') format('truetype');
+}
 
 .dot-elastic {
   position: relative;
