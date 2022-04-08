@@ -22,7 +22,7 @@ const Modal = ({ onClose, children, total, ens, address }: Props) => {
           damping: 20,
         }}
       >
-        <section className="bg-purple-900 border-4 border-orange-500 rounded-md p-4 w-[500px] ">
+        <section className="bg-purple-900 border-4 border-orange-500 rounded-md p-4 w-full md:w-[500px] ">
           <div className="flex items-center justify-between mb-4 text-white">
             <h1 className="font-bold">NFT Receipt</h1>
             <button onClick={onClose} className="hover:text-purple-600 text-lg">

@@ -14,22 +14,23 @@ const Home: NextPage = () => {
   const { ens } = useEns(address || '')
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [play, { stop }] = useSound('/sounds/printer.wav')
+  const [isPrinting, setIsPrinting] = useState(false)
 
-
-  const { nfts, total, loading } = useNfts(address || '')
+  const { nfts, total, loading } = useNfts(address || '', isPrinting)
 
   useEffect(() => {
+    if (!isPrinting) return
     if (nfts.length > 0) {
       console.log('useEffect')
       play()
       const interval = setInterval(() => {
-        console.log('setInterval')
         setIsModalOpen(true)
         clearInterval(interval)
         stop()
-      }, 5000)
+        setIsPrinting(false)
+      }, 6000)
     }
-  }, [nfts])
+  }, [nfts, isPrinting])
 
   return (
     <div className="antialiased overflow-hidden relative">
@@ -39,58 +40,62 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className="bg-gray-800 h-screen font-sans">
-        <div className="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <div className="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8 py-16 h-full grid justify-center items-center">
           {!loading && nfts.length === 0 && (
             <h1 className="mb-4 text-center leading-relaxed font-bold text-2xl text-white max-w-2xl mx-auto">
               Generate your NFT 2022 Receipt and send to your tax accountant
             </h1>
           )}
-          {loading && (
+          {loading && isPrinting && (
             <div className="text-white flex flex-col md:flex-row items-center justify-center gap-8 text-center text-2xl">
               Brb...Sorting out your degen stuff
               <div className="dot-elastic"></div>
             </div>
           )}
-        </div>
-
-        {address && !loading && (
-          <div
-            className="flex items-center justify-center cursor-pointer"
-            onClick={() => setIsModalOpen(true)}
-          >
-            <Receipt
-              address={address}
-              nfts={nfts}
-              total={total}
-              ens={ens || ''}
-              animated
-            ></Receipt>
-          </div>
-        )}
-
-        {isModalOpen && (
-          <Modal
-            onClose={() => setIsModalOpen(false)}
-            total={total}
-            ens={ens || ''}
-            address={address || ''}
-          >
-            {address && !loading && (
+          {address && !loading && nfts.length > 0 && (
+            <div
+              className="flex items-center justify-center cursor-pointer"
+              onClick={() => setIsModalOpen(true)}
+            >
               <Receipt
                 address={address}
                 nfts={nfts}
                 total={total}
                 ens={ens || ''}
+                animated
               ></Receipt>
-            )}
-          </Modal>
-        )}
+            </div>
+          )}
+
+          {isModalOpen && (
+            <Modal
+              onClose={() => setIsModalOpen(false)}
+              total={total}
+              ens={ens || ''}
+              address={address || ''}
+            >
+              {address && !loading && (
+                <Receipt
+                  address={address}
+                  nfts={nfts}
+                  total={total}
+                  ens={ens || ''}
+                ></Receipt>
+              )}
+            </Modal>
+          )}
+        </div>
 
         <Navigation
           address={address || ''}
           connect={connect}
-          disconnect={disconnect}
+          disconnect={() => {
+            disconnect()
+            setIsPrinting(false)
+          }}
           stop={stop}
+          isPrinting={isPrinting}
+          toggle={() => setIsPrinting(!isPrinting)}
         ></Navigation>
       </div>
     </div>

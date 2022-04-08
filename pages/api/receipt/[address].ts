@@ -29,7 +29,7 @@ export default async function handler(
         only_opensea: false,
         account_address: USER_ADDRESS,
         event_type: 'transfer',
-        occurred_after: '1640995200',
+        occurred_after: '1640995200', // 2022-01-01
         cursor: null,
       }
 

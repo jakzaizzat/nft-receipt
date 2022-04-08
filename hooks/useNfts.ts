@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { useEffect, useState } from 'react'
 
-export default function useNfts(address: string) {
+export default function useNfts(address: string, isPrinting: boolean) {
   const [nfts, setNfts] = useState([])
   const [total, setTotal] = useState(0)
   const [loading, setLoading] = useState(false)
@@ -23,17 +23,18 @@ export default function useNfts(address: string) {
   }
 
   useEffect(() => {
+    if (!isPrinting) return
     if (!address) {
       setNfts([])
       setTotal(0)
       return
     }
     fetchNft()
-  }, [address])
+  }, [address, isPrinting])
 
   return {
     nfts,
     total,
-    loading
+    loading,
   }
 }
